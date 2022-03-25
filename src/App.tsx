@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Provider } from 'react-redux';
+import 'firebase/auth';
+// import 'firebase/firestore' // <- needed if using firestore
+// import 'firebase/functions' // <- needed if using httpsCallable
+import {
+  ReactReduxFirebaseProvider} from 'react-redux-firebase'
+import Dashboard from './pages';
+// import { createFirestoreInstance, firestoreReducer } from 'redux-firestore' // <- needed if using firestore
+import { store, rrfProps } from './config/config';
 
+
+// Setup react-redux so that connect HOC can be used
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider store={store}>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <Dashboard />
+      </ReactReduxFirebaseProvider>
+    </Provider>
+  )
 }
-
 export default App;
