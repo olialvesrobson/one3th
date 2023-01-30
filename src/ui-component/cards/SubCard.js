@@ -19,12 +19,19 @@ const SubCard = forwardRef(({ children, content, contentClass, darkTitle, second
                 ':hover': {
                     boxShadow: '0 2px 14px 0 rgb(32 40 45 / 8%)'
                 },
-                ...sx
+                ...sx,
+                marginBottom: '10px'
             }}
             {...others}
         >
             {/* card header and action */}
-            {!darkTitle && title && <CardHeader sx={{ p: 2.5 }} title={<Typography variant="h5">{title}</Typography>} action={secondary} />}
+            {!darkTitle && title && (
+                <CardHeader
+                    sx={{ p: 2.5, backgroundColor: theme.palette.orange.light }}
+                    title={<Typography variant="h4">{title}</Typography>}
+                    action={secondary}
+                />
+            )}
             {darkTitle && title && <CardHeader sx={{ p: 2.5 }} title={<Typography variant="h4">{title}</Typography>} action={secondary} />}
 
             {/* content & header divider */}

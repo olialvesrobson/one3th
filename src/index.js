@@ -1,27 +1,40 @@
-import { createRoot } from 'react-dom/client';
-
 // third party
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom/client';
 
 // project imports
 import * as serviceWorker from 'serviceWorker';
 import App from 'App';
-import { store } from 'store';
+//import { store } from 'store';
 
 // style + assets
 import 'assets/scss/style.scss';
 import config from './config';
 
+//import ScrollToTop from './resources/components/utils/scrollToTop';
+import { fbConfig, rrfConfig, configureStore, rrfProps } from './resources/config/firestore/store';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore';
+
 // ==============================|| REACT DOM RENDER  ||============================== //
 
-const container = document.getElementById('root');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
+const store = configureStore();
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-        <BrowserRouter basename={config.basename}>
-            <App />
-        </BrowserRouter>
+        <ReactReduxFirebaseProvider
+            firebase={fbConfig}
+            config={rrfConfig}
+            dispatch={store.dispatch}
+            createFirestoreInstance={createFirestoreInstance}
+            {...rrfProps}
+        >
+            <BrowserRouter basename={config.basename}>
+                <App />
+            </BrowserRouter>
+        </ReactReduxFirebaseProvider>
     </Provider>
 );
 

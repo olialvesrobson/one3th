@@ -34,6 +34,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
+import { SignInWithGoogle } from '../actions';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -45,7 +46,8 @@ const FirebaseLogin = ({ ...others }) => {
     const [checked, setChecked] = useState(true);
 
     const googleHandler = async () => {
-        console.error('Login');
+        console.log('Login');
+        SignInWithGoogle({ action: 'signin' });
     };
 
     const [showPassword, setShowPassword] = useState(false);

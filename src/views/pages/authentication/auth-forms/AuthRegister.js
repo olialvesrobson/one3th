@@ -35,6 +35,7 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { SignInWithGoogle } from '../actions';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
@@ -50,7 +51,8 @@ const FirebaseRegister = ({ ...others }) => {
     const [level, setLevel] = useState();
 
     const googleHandler = async () => {
-        console.error('Register');
+        const result = await SignInWithGoogle('signup');
+        console.log(result);
     };
 
     const handleClickShowPassword = () => {

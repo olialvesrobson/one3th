@@ -17,6 +17,14 @@ const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
+// Users
+const AddUser = Loadable(lazy(() => import('views/pages/users/page')));
+
+// Companies
+const CompanyView = Loadable(lazy(() => import('views/pages/companies/forms/view')));
+const AddCompany = Loadable(lazy(() => import('views/pages/companies/page/add')));
+const EditCompany = Loadable(lazy(() => import('views/pages/companies/page/view')));
+const DetailCompany = Loadable(lazy(() => import('views/pages/companies/page/detail')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -33,6 +41,60 @@ const MainRoutes = {
                 {
                     path: 'default',
                     element: <DashboardDefault />
+                }
+            ]
+        },
+        {
+            path: 'users',
+            children: [
+                {
+                    path: '',
+                    element: <h1>Users View</h1>
+                }
+            ]
+        },
+        {
+            path: 'users',
+            children: [
+                {
+                    path: 'add',
+                    element: <AddUser />
+                }
+            ]
+        },
+        {
+            path: 'companies',
+            children: [
+                {
+                    path: '',
+                    element: <CompanyView />
+                }
+            ]
+        },
+        {
+            path: 'companies',
+            children: [
+                {
+                    path: 'add',
+                    element: <AddCompany />
+                }
+            ]
+        },
+        {
+            path: 'companies',
+            children: [
+                {
+                    path: 'edit',
+                    element: <EditCompany />
+                }
+            ]
+        },
+        {
+            path: 'companies',
+            children: [
+                {
+                    path: 'detail',
+                    element: <DetailCompany />
                 }
             ]
         },
