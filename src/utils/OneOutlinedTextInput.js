@@ -12,7 +12,7 @@ function OneOutlinedTextInput(props) {
             error={error}
             item={layout == 'twoColoumns' && true}
             sx={layout == 'twoColoumns' ? 12 : { ...theme.typography.customInput }}
-            sm={layout == 'twoColoumns' && 6}
+            sm={layout == 'twoColoumns' ? 6 : 12}
         >
             <InputLabel htmlFor={name}>{label}</InputLabel>
             <OutlinedInput

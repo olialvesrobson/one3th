@@ -16,13 +16,21 @@ import { userReducer } from 'views/pages/users/reducers';
 // import { store } from 'store';
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyBv_VSq7Ks6Ke7MMml6hCta04YtJhpn9aM',
-    authDomain: 'icontroled.firebaseapp.com',
-    databaseURL: 'https://icontroled.firebaseio.com',
-    projectId: 'icontroled',
-    storageBucket: 'icontroled.appspot.com',
-    messagingSenderId: '89600774314',
-    appId: '1:89600774314:web:a9d31779455b5ab5a7c0d3'
+    // apiKey: 'AIzaSyBv_VSq7Ks6Ke7MMml6hCta04YtJhpn9aM',
+    // authDomain: 'icontroled.firebaseapp.com',
+    // databaseURL: 'https://icontroled.firebaseio.com',
+    // projectId: 'icontroled',
+    // storageBucket: 'icontroled.appspot.com',
+    // messagingSenderId: '89600774314',
+    // appId: '1:89600774314:web:a9d31779455b5ab5a7c0d3'
+
+    apiKey: 'AIzaSyAAKTAp5FV2t5acpLungL9c4yDEJ7t16h8',
+    authDomain: 'dudedevs.firebaseapp.com',
+    databaseURL: 'https://dudedevs.firebaseio.com',
+    projectId: 'dudedevs',
+    storageBucket: 'dudedevs.appspot.com',
+    messagingSenderId: '836114904416',
+    appId: '1:836114904416:web:dc80049b0384e87b2ada05'
 };
 
 // initialize firebase instance
@@ -54,7 +62,8 @@ const configureStore = () => {
 const rrfConfig = {
     userProfile: 'users',
     attachAuthIsReady: true,
-    useFirestoreForProfile: true
+    useFirestoreForProfile: true,
+    dispatch: configureStore.dispatch
 };
 
 const rrfProps = {

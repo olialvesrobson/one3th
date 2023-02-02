@@ -13,7 +13,7 @@ function OneTextInput(props) {
                 id={id}
                 type={name}
                 value={value}
-                defaultValue={defaultValue}
+                defaultValue={''}
                 name={name}
                 label={label}
                 onBlur={onBlur}

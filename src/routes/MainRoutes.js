@@ -25,6 +25,7 @@ const CompanyView = Loadable(lazy(() => import('views/pages/companies/forms/view
 const AddCompany = Loadable(lazy(() => import('views/pages/companies/page/add')));
 const EditCompany = Loadable(lazy(() => import('views/pages/companies/page/view')));
 const DetailCompany = Loadable(lazy(() => import('views/pages/companies/page/detail')));
+const SettingsCompany = Loadable(lazy(() => import('views/pages/companies/page/settings')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -95,6 +96,15 @@ const MainRoutes = {
                 {
                     path: 'detail',
                     element: <DetailCompany />
+                }
+            ]
+        },
+        {
+            path: 'companies',
+            children: [
+                {
+                    path: 'settings',
+                    element: <SettingsCompany />
                 }
             ]
         },

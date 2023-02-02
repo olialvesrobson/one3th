@@ -1,6 +1,9 @@
 const initState = {
     company: [],
-    companies: []
+    companies: [],
+    employeeInvites: [],
+    companyInvites: [],
+    companiesInvited: []
 };
 
 export const companyReducer = (state = initState, action) => {
@@ -23,6 +26,21 @@ export const companyReducer = (state = initState, action) => {
             return {
                 ...state,
                 companies: action.companies
+            };
+        case 'FETCH_EMPLOYEE_INVITES':
+            return {
+                ...state,
+                employeeInvites: action.employeeInvites
+            };
+        case 'FETCH_COMPANY_INVITES':
+            return {
+                ...state,
+                companyInvites: action.companyInvites
+            };
+        case 'FETCH_COMPANIES_INVITED':
+            return {
+                ...state,
+                companiesInvited: action.companiesInvited
             };
         case 'FETCH_COMPANIES_ERROR':
             console.log('fetch companies error', action.err);

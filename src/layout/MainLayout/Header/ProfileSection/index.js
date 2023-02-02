@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -14,12 +14,10 @@ import {
     ClickAwayListener,
     Divider,
     Grid,
-    InputAdornment,
     List,
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    OutlinedInput,
     Paper,
     Popper,
     Stack,
@@ -36,9 +34,9 @@ import Transitions from 'ui-component/extended/Transitions';
 import UpgradePlanCard from './UpgradePlanCard';
 
 // assets
-import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
+import { IconLogout, IconSettings, IconUser } from '@tabler/icons';
 import { SignOut } from 'views/pages/authentication/actions';
-import { auth } from 'resources/config/firestore/store';
+import { UserContext } from 'views/pages/users/actions';
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -46,14 +44,14 @@ const ProfileSection = () => {
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
     const navigate = useNavigate();
+    const userProfile = useContext(UserContext);
 
     const user = {
-        photoURL: auth.currentUser.photoURL,
-        profileName: auth.currentUser.displayName,
-        email: auth.currentUser.email
+        photoURL: userProfile.photoURL,
+        profileName: userProfile.name,
+        email: userProfile.companyEnrolledName || 'Enrolled to a company'
     };
     const [sdm, setSdm] = useState(true);
-    const [value, setValue] = useState('');
     const [notification, setNotification] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const [open, setOpen] = useState(false);
@@ -163,14 +161,14 @@ const ProfileSection = () => {
                                     <Box sx={{ p: 2 }}>
                                         <Stack>
                                             <Stack direction="row" spacing={0.5} alignItems="center">
-                                                <Typography variant="h4">Good Morning,</Typography>
+                                                <Typography variant="h4">Hello,</Typography>
                                                 <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
                                                     {user.profileName}
                                                 </Typography>
                                             </Stack>
                                             <Typography variant="subtitle2">{user.email}</Typography>
                                         </Stack>
-                                        <OutlinedInput
+                                        {/* <OutlinedInput
                                             sx={{ width: '100%', pr: 1, pl: 2, my: 2 }}
                                             id="input-search-profile"
                                             value={value}
@@ -185,7 +183,8 @@ const ProfileSection = () => {
                                             inputProps={{
                                                 'aria-label': 'weight'
                                             }}
-                                        />
+                                        /> */}
+                                        <br />
                                         <Divider />
                                     </Box>
                                     <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>

@@ -52,6 +52,14 @@ const companies = {
                     url: '/companies/detail',
                     icon: icons.IconFileDigit,
                     breadcrumbs: true
+                },
+                {
+                    id: 'settings-company',
+                    title: 'Settings',
+                    type: 'item',
+                    url: '/companies/settings',
+                    icon: icons.IconFileDigit,
+                    breadcrumbs: true
                 }
             ]
         }

@@ -16,7 +16,6 @@ export const SignInWithGoogle = (props) => {
 
             const docRef = doc(firestore, 'users', user.uid);
             const docSnap = await getDoc(docRef);
-            console.log(docSnap.data());
             if (docSnap.exists()) {
                 if (props.action === 'signin') {
                     // SingIn

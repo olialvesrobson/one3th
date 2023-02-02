@@ -1,9 +1,8 @@
 // material-ui
 import { styled } from '@mui/material/styles';
-import { Button, Card, CardContent, Grid, Stack, Typography } from '@mui/material';
+import { Card, CardContent, Grid, Typography } from '@mui/material';
 
 // project imports
-import AnimateButton from 'ui-component/extended/AnimateButton';
 
 // styles
 const CardStyle = styled(Card)(({ theme }) => ({
@@ -43,15 +42,15 @@ const UpgradePlanCard = () => (
         <CardContent>
             <Grid container direction="column" spacing={2}>
                 <Grid item>
-                    <Typography variant="h4">Upgrade your plan</Typography>
+                    <Typography variant="h4">Beta version</Typography>
                 </Grid>
                 <Grid item>
                     <Typography variant="subtitle2" color="grey.900" sx={{ opacity: 0.6 }}>
-                        70% discount for 1 years <br />
-                        subscriptions.
+                        Enjoy this beta version. We're developing an amazing software for you.
+                        <br />
                     </Typography>
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                     <Stack direction="row">
                         <AnimateButton>
                             <Button variant="contained" color="warning" sx={{ boxShadow: 'none' }}>
@@ -59,7 +58,7 @@ const UpgradePlanCard = () => (
                             </Button>
                         </AnimateButton>
                     </Stack>
-                </Grid>
+                </Grid> */}
             </Grid>
         </CardContent>
     </CardStyle>

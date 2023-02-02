@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -15,7 +16,7 @@ import OneOutlinedTextInput from 'utils/OneOutlinedTextInput';
 import OneTextInput from 'utils/OneTextInput';
 import OneSelect from 'utils/OneSelect';
 import { add } from '../actions';
-import { UserState } from 'views/pages/authentication/actions';
+import { UserContext } from 'views/pages/users/actions';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
@@ -24,18 +25,17 @@ const FormAdd = ({ ...others }) => {
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     //const customization = useSelector((state) => state.customization);
-    const getUser = UserState();
+    const user = useContext(UserContext);
     const [strength, setStrength] = useState(0);
     const [level, setLevel] = useState();
     const [saved, setSaved] = useState(false);
     // const ausAbr = require('aus-abr');
 
     useEffect(() => {
-        console.log(getUser);
         setLevel(0);
         setStrength(0);
         setSaved(false);
-    }, [getUser]);
+    }, []);
 
     const dataNumberOfEmployees = [
         { key: '1-2', value: '1-2' },
@@ -51,8 +51,10 @@ const FormAdd = ({ ...others }) => {
             email: values.companyEmail,
             abn: values.companyABN,
             numberOfEmployees: values.numberOfEmployees,
-            owner: getUser
+            owner: user.uid,
+            userName: user.firstName + ' ' + user.lastName
         });
+        <Navigate to="/companies" />;
     }
 
     const renderSavedWithSuccess = () => {

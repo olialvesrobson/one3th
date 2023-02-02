@@ -1,6 +1,7 @@
 const initState = {
     user: [],
-    users: []
+    users: [],
+    companies: []
 };
 
 export const userReducer = (state = initState, action) => {
@@ -27,8 +28,13 @@ export const userReducer = (state = initState, action) => {
         case 'FETCH_USERS_ERROR':
             console.log('fetch users error', action.err);
             return state;
+        case 'FETCH_USER_COMPANIES':
+            return {
+                ...state,
+                companies: action.companies
+            };
         case 'EDIT_USER':
-            console.log('edit user', action.user);
+            console.log('edit user', action.companies);
             return state;
         case 'EDIT_USER_ERROR':
             console.log('edit user error', action.err);

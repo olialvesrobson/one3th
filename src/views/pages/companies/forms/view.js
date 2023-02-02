@@ -1,25 +1,26 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 // material-ui
 import { Box, Button, Grid } from '@mui/material';
 import MuiTypography from '@mui/material/Typography';
 
 // project imports
-import { fetchCompanies } from '../actions';
 import { UserState } from 'views/pages/authentication/actions';
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserCompanies, setUserEnrolledToCompany, UserContext } from 'views/pages/users/actions';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
 const CompanyView = () => {
     const dispatch = useDispatch();
-    dispatch(fetchCompanies());
-    const companies = useSelector((state) => state.companies.companies);
+    const user = useContext(UserContext);
+    const companies = useSelector((state) => state.users.companies);
     const getUser = UserState();
+    dispatch(fetchUserCompanies({ userId: user.uid }));
     // const ausAbr = require('aus-abr');
 
     const renderEnrollButton = (action) => {
@@ -31,12 +32,16 @@ const CompanyView = () => {
                         size="small"
                         type="button"
                         variant="contained"
-                        color="primary"
+                        color={action.companyId == user.companyEnrolled ? 'secondary' : 'primary'}
                         onClick={() => {
-                            console.log({ action: action, userId: getUser });
+                            if (action.companyId == user.companyEnrolled) {
+                                console.log('already logged');
+                            } else {
+                                setUserEnrolledToCompany({ companyId: action.companyId, companyName: action.companyName, user: getUser });
+                            }
                         }}
                     >
-                        Enroll
+                        {action.companyId == user.companyEnrolled ? 'Enrolled' : 'Enroll'}
                     </Button>
                 </AnimateButton>
             </Box>
@@ -59,11 +64,15 @@ const CompanyView = () => {
                         {companies &&
                             companies.map((companies) => {
                                 return (
-                                    <SubCard key={companies.id} title={companies.name} secondary={renderEnrollButton(companies.id)}>
+                                    <SubCard
+                                        key={companies.id}
+                                        title={companies.name}
+                                        secondary={renderEnrollButton({ companyId: companies.id, companyName: companies.name })}
+                                    >
                                         <Grid container direction="column" spacing={1}>
                                             <Grid item>
                                                 <MuiTypography variant="subtitle2" gutterBottom>
-                                                    {companies.email}
+                                                    {companies.role}
                                                 </MuiTypography>
                                             </Grid>
                                         </Grid>

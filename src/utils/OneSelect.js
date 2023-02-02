@@ -22,7 +22,11 @@ function OneSelect(props) {
                 {
                     // eslint-disable-next-line
                     items.map((item) => {
-                        return <MenuItem value={item.value}>{item.key}</MenuItem>;
+                        return (
+                            <MenuItem key={item.value} value={item.value}>
+                                {item.key}
+                            </MenuItem>
+                        );
                     })
                 }
             </Select>
