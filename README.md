@@ -1,6 +1,6 @@
 # One3th: Small Business Management App
 
-![One3th Logo](images/logo.png)  <!-- Add an actual image path if available -->
+![One3th Logo](images/companies_screen.png)  <!-- Add an actual image path if available -->
 
 ## Overview
 
