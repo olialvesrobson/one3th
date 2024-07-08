@@ -1,10 +1,10 @@
-# One3th: Small Business Management App
+# One3th Management
 
 ![One3th Logo](images/logo.png)  <!-- Add an actual image path if available -->
 
 ## Overview
 
-One3th is a comprehensive small business management application designed to streamline and simplify your business operations. This personal project encompasses various features such as invoicing, expense tracking, appointment scheduling, task management, and more.
+One3th Management is a comprehensive web application designed to streamline and simplify small business operations. This project includes features for managing invoices, expenses, appointments, tasks, inventory, customer relationships, and more.
 
 ## Features
 
@@ -27,40 +27,21 @@ One3th is a comprehensive small business management application designed to stre
     cd one3th
     ```
 
-2. **Create a virtual environment and activate it:**
+2. **Install dependencies:**
 
     ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    npm install
     ```
 
-3. **Install dependencies:**
+3. **Run the development server:**
 
     ```bash
-    pip install -r requirements.txt
+    npm start
     ```
 
-4. **Apply migrations:**
+4. **Access the application:**
 
-    ```bash
-    python manage.py migrate
-    ```
-
-5. **Create a superuser:**
-
-    ```bash
-    python manage.py createsuperuser
-    ```
-
-6. **Run the development server:**
-
-    ```bash
-    python manage.py runserver
-    ```
-
-7. **Access the application:**
-
-    Open your browser and go to `http://127.0.0.1:8000/`.
+    Open your browser and go to `http://localhost:3000/`.
 
 ## Usage
 
@@ -68,36 +49,119 @@ One3th is a comprehensive small business management application designed to stre
 
 Create and manage invoices effortlessly.
 
-```python
-from .models import Invoice
+```jsx
+import { useDispatch } from 'react-redux';
+import { createInvoice } from './actions/invoiceActions';
 
-# Create an invoice
-invoice = Invoice.objects.create(customer=customer, amount=500.00, due_date='2024-07-08')
-invoice.save()
+const dispatch = useDispatch();
+const invoiceData = {
+  customer: 'John Doe',
+  amount: 500.00,
+  dueDate: '2024-07-08',
+};
+
+dispatch(createInvoice(invoiceData));
 ```
 
 ### Expense Tracking
 
 Keep track of all your business expenses.
 
-```python
-from .models import Expense
+```jsx
+import { useDispatch } from 'react-redux';
+import { createExpense } from './actions/expenseActions';
 
-# Record a new expense
-expense = Expense.objects.create(category='Office Supplies', amount=100.00, date='2024-07-08')
-expense.save()
+const dispatch = useDispatch();
+const expenseData = {
+  category: 'Office Supplies',
+  amount: 100.00,
+  date: '2024-07-08',
+};
+
+dispatch(createExpense(expenseData));
 ```
 
 ### Appointment Scheduling
 
 Schedule and manage appointments with ease.
 
-```python
-from .models import Appointment
+```jsx
+import { useDispatch } from 'react-redux';
+import { createAppointment } from './actions/appointmentActions';
 
-# Schedule an appointment
-appointment = Appointment.objects.create(client=client, date='2024-07-10', time='10:00:00')
-appointment.save()
+const dispatch = useDispatch();
+const appointmentData = {
+  client: 'Jane Smith',
+  date: '2024-07-10',
+  time: '10:00:00',
+};
+
+dispatch(createAppointment(appointmentData));
+```
+
+### Task Management
+
+Organize and prioritize tasks efficiently.
+
+```jsx
+import { useDispatch } from 'react-redux';
+import { createTask } from './actions/taskActions';
+
+const dispatch = useDispatch();
+const taskData = {
+  title: 'Prepare financial report',
+  description: 'Prepare the monthly financial report',
+  dueDate: '2024-07-15',
+};
+
+dispatch(createTask(taskData));
+```
+
+### Inventory Management
+
+Maintain control over your inventory.
+
+```jsx
+import { useDispatch } from 'react-redux';
+import { createInventoryItem } from './actions/inventoryActions';
+
+const dispatch = useDispatch();
+const itemData = {
+  name: 'Tennis Balls',
+  quantity: 100,
+  price: 2.50,
+};
+
+dispatch(createInventoryItem(itemData));
+```
+
+### Customer Relationship Management (CRM)
+
+Manage customer interactions and data.
+
+```jsx
+import { useDispatch } from 'react-redux';
+import { createCustomer } from './actions/customerActions';
+
+const dispatch = useDispatch();
+const customerData = {
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+  phone: '123-456-7890',
+};
+
+dispatch(createCustomer(customerData));
+```
+
+### Reporting and Analytics
+
+Generate insightful business reports.
+
+```jsx
+import { generateMonthlyReport } from './reports';
+
+const report = generateMonthlyReport('July', 2024);
+console.log(report);
 ```
 
 ## Contributing
