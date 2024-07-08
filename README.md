@@ -1,21 +1,128 @@
-# one3th 
+# One3th: Small Business Management App
 
-A small business management app can include a variety of features to help business owners manage their operations more efficiently. Some common features that such an app might include are:
+![One3th Logo](images/logo.png)  <!-- Add an actual image path if available -->
 
-"Invoicing and billing": The ability to create, send, and track invoices and bills to customers.
+## Overview
 
-"Expense tracking": A system for recording and tracking business expenses, such as office supplies, travel costs, and employee expenses.
+One3th is a comprehensive small business management application designed to streamline and simplify your business operations. This personal project encompasses various features such as invoicing, expense tracking, appointment scheduling, task management, and more.
 
-"Appointment scheduling": A calendar and scheduling system for managing appointments and reservations with customers.
+## Features
 
-"Task management": A system for creating, assigning, and tracking tasks and to-do lists for employees.
+- **Invoicing and Billing**: Create, send, and track invoices.
+- **Expense Tracking**: Record and monitor business expenses.
+- **Appointment Scheduling**: Manage appointments with a built-in calendar system.
+- **Task Management**: Create, assign, and track tasks.
+- **Inventory Management**: Track inventory levels and manage stock.
+- **Customer Relationship Management (CRM)**: Organize customer contact information and interactions.
+- **Reporting and Analytics**: Generate and visualize business reports.
+- **User Management**: Manage user roles and permissions.
+- **Authentication**: Secure access with user authentication.
 
-"Inventory management": A system for tracking inventory levels, managing stock, and generating reports on product sales and usage.
+## Installation
 
-"Customer relationship management": A system for storing and organizing contact information for customers, as well as tracking sales and customer interactions.
+1. **Clone the repository:**
 
-"Reporting and analytics": A system for generating reports on various aspects of the business, such as sales, expenses, and customer interactions, and visualizing the data through charts and graphs.
+    ```bash
+    git clone git@github.com:olialvesrobson/one3th.git
+    cd one3th
+    ```
 
-"User Management": A system for creating, editing and deleting users and assign different roles to them.
+2. **Create a virtual environment and activate it:**
 
-"Authentication": A system for securing the app, by requiring users to sign in and providing different levels of access to different parts of the app based on their role.
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+
+3. **Install dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Apply migrations:**
+
+    ```bash
+    python manage.py migrate
+    ```
+
+5. **Create a superuser:**
+
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+6. **Run the development server:**
+
+    ```bash
+    python manage.py runserver
+    ```
+
+7. **Access the application:**
+
+    Open your browser and go to `http://127.0.0.1:8000/`.
+
+## Usage
+
+### Invoicing
+
+Create and manage invoices effortlessly.
+
+```python
+from .models import Invoice
+
+# Create an invoice
+invoice = Invoice.objects.create(customer=customer, amount=500.00, due_date='2024-07-08')
+invoice.save()
+```
+
+### Expense Tracking
+
+Keep track of all your business expenses.
+
+```python
+from .models import Expense
+
+# Record a new expense
+expense = Expense.objects.create(category='Office Supplies', amount=100.00, date='2024-07-08')
+expense.save()
+```
+
+### Appointment Scheduling
+
+Schedule and manage appointments with ease.
+
+```python
+from .models import Appointment
+
+# Schedule an appointment
+appointment = Appointment.objects.create(client=client, date='2024-07-10', time='10:00:00')
+appointment.save()
+```
+
+## Contributing
+
+1. **Fork the repository**
+2. **Create a new branch**
+
+    ```bash
+    git checkout -b feature-branch
+    ```
+
+3. **Commit your changes**
+
+    ```bash
+    git commit -am 'Add new feature'
+    ```
+
+4. **Push to the branch**
+
+    ```bash
+    git push origin feature-branch
+    ```
+
+5. **Create a new Pull Request**
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
