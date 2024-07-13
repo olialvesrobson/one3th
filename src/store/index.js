@@ -1,9 +1,13 @@
-import { createStore } from 'redux';
-import reducer from './reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './slice/user';
+import companyReducer from './slice/company';
 
-// ==============================|| REDUX - MAIN STORE ||============================== //
+const store = configureStore({
+  reducer: {
+    user: userReducer,
+    company: companyReducer,
+  },
+});
 
-const store = createStore(reducer);
 const persister = 'Free';
-
 export { store, persister };
