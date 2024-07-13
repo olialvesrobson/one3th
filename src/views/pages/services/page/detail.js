@@ -17,9 +17,9 @@ const Register = () => {
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
     const detaultValues = {
-        companyName: 'teste',
-        companyEmail: 'teste@teste.com',
-        companyABN: '1234567890',
+        serviceName: 'teste',
+        serviceEmail: 'teste@teste.com',
+        serviceABN: '1234567890',
         numberOfEmployees: '1-2'
     };
 
@@ -38,16 +38,16 @@ const Register = () => {
                                                 gutterBottom
                                                 variant={matchDownSM ? 'h3' : 'h2'}
                                             >
-                                                Company detail
+                                                Service detail
                                             </Typography>
                                         </Stack>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Detail
-                                            companyEmail={detaultValues.companyEmail}
+                                            serviceEmail={detaultValues.serviceEmail}
                                             numberOfEmployees={detaultValues.numberOfEmployees}
-                                            companyName={detaultValues.companyName}
-                                            companyABN={detaultValues.companyABN}
+                                            serviceName={detaultValues.serviceName}
+                                            serviceABN={detaultValues.serviceABN}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>

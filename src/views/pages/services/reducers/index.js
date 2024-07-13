@@ -1,61 +1,61 @@
 const initState = {
-    company: [],
-    companies: [],
+    service: [],
+    services: [],
     employeeInvites: [],
-    companyInvites: [],
-    companiesInvited: []
+    serviceInvites: [],
+    servicesInvited: []
 };
 
-export const companyReducer = (state = initState, action) => {
+export const serviceReducer = (state = initState, action) => {
     switch (action.type) {
-        case 'CREATE_COMPANY':
-            console.log('create company', action.company);
+        case 'CREATE_SERVICE':
+            console.log('create service', action.service);
             return state;
-        case 'CREATE_COMPANY_ERROR':
-            console.log('create company error', action.err);
+        case 'CREATE_SERVICE_ERROR':
+            console.log('create service error', action.err);
             return state;
-        case 'FETCH_COMPANY':
+        case 'FETCH_SERVICE':
             return {
                 ...state,
-                company: action.company
+                service: action.service
             };
-        case 'FETCH_COMPANY_ERROR':
-            console.log('fetch company error', action.err);
+        case 'FETCH_SERVICE_ERROR':
+            console.log('fetch service error', action.err);
             return state;
-        case 'FETCH_COMPANIES':
+        case 'FETCH_SERVICES':
             return {
                 ...state,
-                companies: action.companies
+                services: action.services
             };
         case 'FETCH_EMPLOYEE_INVITES':
             return {
                 ...state,
                 employeeInvites: action.employeeInvites
             };
-        case 'FETCH_COMPANY_INVITES':
+        case 'FETCH_SERVICE_INVITES':
             return {
                 ...state,
-                companyInvites: action.companyInvites
+                serviceInvites: action.serviceInvites
             };
-        case 'FETCH_COMPANIES_INVITED':
+        case 'FETCH_SERVICES_INVITED':
             return {
                 ...state,
-                companiesInvited: action.companiesInvited
+                servicesInvited: action.servicesInvited
             };
-        case 'FETCH_COMPANIES_ERROR':
-            console.log('fetch companies error', action.err);
+        case 'FETCH_SERVICES_ERROR':
+            console.log('fetch services error', action.err);
             return state;
-        case 'EDIT_COMPANY':
-            console.log('edit company', action.company);
+        case 'EDIT_SERVICE':
+            console.log('edit service', action.service);
             return state;
-        case 'EDIT_COMPANY_ERROR':
-            console.log('edit company error', action.err);
+        case 'EDIT_SERVICE_ERROR':
+            console.log('edit service error', action.err);
             return state;
-        case 'CREATE_IMAGE_COMPANY':
-            console.log('create image on company', action.company);
+        case 'CREATE_IMAGE_SERVICE':
+            console.log('create image on service', action.service);
             return state;
-        case 'CREATE_IMAGE_COMPANY_ERROR':
-            console.log('create image on company error', action.err);
+        case 'CREATE_IMAGE_SERVICE_ERROR':
+            console.log('create image on service error', action.err);
             return state;
         default:
             return state;

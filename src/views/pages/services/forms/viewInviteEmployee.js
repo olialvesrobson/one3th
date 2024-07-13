@@ -11,8 +11,8 @@ import SubCard from 'ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCompanyToUser, UserContext } from 'views/pages/users/actions';
-import { setUserToCompany } from 'views/pages/companies/actions';
+import { setServiceToUser, UserContext } from 'views/pages/users/actions';
+import { setUserToService } from 'views/pages/services/actions';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
@@ -20,10 +20,10 @@ const ViewInviteEmployee = () => {
     const dispatch = useDispatch();
     const user = useContext(UserContext);
     // const ausAbr = require('aus-abr');
-    const invites = useSelector((state) => state.companies.employeeInvites);
-    // const companies = invites.reduce((previous, current) => {
-    //     fetchCompany.find((item) => {
-    //         if (item.id == current.companyId) {
+    const invites = useSelector((state) => state.services.employeeInvites);
+    // const services = invites.reduce((previous, current) => {
+    //     fetchService.find((item) => {
+    //         if (item.id == current.serviceId) {
     //             return { ...item };
     //         }
     //     });
@@ -40,13 +40,13 @@ const ViewInviteEmployee = () => {
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            setCompanyToUser({
-                                companyId: action.companyId,
-                                companyName: action.companyName,
+                            setServiceToUser({
+                                serviceId: action.serviceId,
+                                serviceName: action.serviceName,
                                 user: user.uid,
                                 role: action.role
                             });
-                            setUserToCompany({ companyId: action.companyId, userId: user.uid, userName: user.name, role: action.role });
+                            setUserToService({ serviceId: action.serviceId, userId: user.uid, userName: user.name, role: action.role });
                             removeInviteEmployee({ email: action.email });
                         }}
                     >
@@ -58,7 +58,7 @@ const ViewInviteEmployee = () => {
     };
 
     useEffect(() => {
-        //setCompanies()
+        //setServices()
         dispatch(fetchEmployeeInvites({ email: user.email }));
     }, [dispatch, user.email]);
 
@@ -68,7 +68,7 @@ const ViewInviteEmployee = () => {
                 <Grid item xs={12} container alignItems="center" justifyContent="center"></Grid>
             </Grid>
 
-            <MainCard title="Companies">
+            <MainCard title="Services">
                 <Grid container rowSpacing={gridSpacing} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     <Grid item xs={12} sm={12} lg={12}>
                         {invites &&
@@ -76,7 +76,7 @@ const ViewInviteEmployee = () => {
                                 return (
                                     <SubCard
                                         key={item.id}
-                                        title={item.companyName}
+                                        title={item.serviceName}
                                         secondary={() => (
                                             <Button
                                                 onClick={removeInviteEmployee({ email: item })}

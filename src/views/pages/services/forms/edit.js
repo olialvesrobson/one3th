@@ -45,9 +45,9 @@ const FormEdit = ({ props, ...others }) => {
     function handleSave(values) {
         props.id && edit({
             id: props.id,
-            name: values.companyName,
-            email: values.companyEmail,
-            abn: values.companyABN,
+            name: values.serviceName,
+            email: values.serviceEmail,
+            abn: values.serviceABN,
             numberOfEmployees: values.numberOfEmployees,
             owner: getUser
         });
@@ -73,10 +73,10 @@ const FormEdit = ({ props, ...others }) => {
 
             <Formik
                 initialValues={{
-                    companyEmail: props.companyEmail,
+                    serviceEmail: props.serviceEmail,
                     numberOfEmployees: props.numberOfEmployees,
-                    companyName: props.companyName,
-                    companyABN: props.companyABN,
+                    serviceName: props.serviceName,
+                    serviceABN: props.serviceABN,
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
@@ -103,21 +103,21 @@ const FormEdit = ({ props, ...others }) => {
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <Grid container spacing={matchDownSM ? 0 : 2}>
                             <OneTextInput
-                                label="Company Name"
-                                id="outlined-adornment-companyName-register"
-                                name="companyName"
+                                label="Service Name"
+                                id="outlined-adornment-serviceName-register"
+                                name="serviceName"
                                 type="text"
-                                value={values.companyName}
+                                value={values.serviceName}
                                 defaultValue=""
                                 onChange={handleChange}
                                 inputProps={{}}
                             />
                             <OneTextInput
-                                label="Company ABN"
-                                id="outlined-adornment-companyABN-register"
-                                name="companyABN"
+                                label="Service ABN"
+                                id="outlined-adornment-serviceABN-register"
+                                name="serviceABN"
                                 type="number"
-                                value={values.companyABN}
+                                value={values.serviceABN}
                                 defaultValue=""
                                 onChange={handleChange}
                                 inputProps={{}}
@@ -129,7 +129,7 @@ const FormEdit = ({ props, ...others }) => {
                             layout="fullWidth"
                             label="Email Address"
                             id="outlined-adornment-email-register"
-                            name="companyEmail"
+                            name="serviceEmail"
                             type="email"
                             value={values.email}
                             onBlur={handleBlur}

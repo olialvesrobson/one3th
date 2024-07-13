@@ -36,9 +36,9 @@ const Detail = ({ ...others }) => {
     ];
 
     const detaultValues = {
-        companyName: 'teste',
-        companyEmail: 'teste@teste.com',
-        companyABN: '1234567890',
+        serviceName: 'teste',
+        serviceEmail: 'teste@teste.com',
+        serviceABN: '1234567890',
         numberOfEmployees: '1-2'
     };
 
@@ -54,30 +54,30 @@ const Detail = ({ ...others }) => {
 
             <Formik
                 initialValues={{
-                    companyEmail: detaultValues.companyEmail,
+                    serviceEmail: detaultValues.serviceEmail,
                     numberOfEmployees: detaultValues.numberOfEmployees,
-                    companyName: detaultValues.companyName,
-                    companyABN: detaultValues.companyABN
+                    serviceName: detaultValues.serviceName,
+                    serviceABN: detaultValues.serviceABN
                 }}
             >
                 {({ handleBlur, values }) => (
                     <form {...others}>
                         <Grid container spacing={matchDownSM ? 0 : 2}>
                             <OneTextInput
-                                label="Company Name"
-                                id="outlined-adornment-companyName-register"
-                                name="companyName"
+                                label="Service Name"
+                                id="outlined-adornment-serviceName-register"
+                                name="serviceName"
                                 type="text"
-                                value={values.companyName}
+                                value={values.serviceName}
                                 defaultValue=""
                                 inputProps={{}}
                             />
                             <OneTextInput
-                                label="Company ABN"
-                                id="outlined-adornment-companyABN-register"
-                                name="companyABN"
+                                label="Service ABN"
+                                id="outlined-adornment-serviceABN-register"
+                                name="serviceABN"
                                 type="number"
-                                value={values.companyABN}
+                                value={values.serviceABN}
                                 defaultValue=""
                                 inputProps={{}}
                             />
@@ -87,7 +87,7 @@ const Detail = ({ ...others }) => {
                             layout="fullWidth"
                             label="Email Address"
                             id="outlined-adornment-email-register"
-                            name="companyEmail"
+                            name="serviceEmail"
                             type="email"
                             value={values.email}
                             onBlur={handleBlur}

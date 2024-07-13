@@ -11,16 +11,16 @@ import SubCard from 'ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserCompanies, setUserEnrolledToCompany, UserContext } from 'views/pages/users/actions';
+import { fetchUserServices, setUserEnrolledToService, UserContext } from 'views/pages/users/actions';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
-const CompanyView = () => {
+const ServiceView = () => {
     const dispatch = useDispatch();
     const user = useContext(UserContext);
-    const companies = useSelector((state) => state.users.companies);
+    const services = useSelector((state) => state.users.services);
     const getUser = UserState();
-    dispatch(fetchUserCompanies({ userId: user.uid }));
+    dispatch(fetchUserServices({ userId: user.uid }));
     // const ausAbr = require('aus-abr');
 
     const renderEnrollButton = (action) => {
@@ -32,16 +32,16 @@ const CompanyView = () => {
                         size="small"
                         type="button"
                         variant="contained"
-                        color={action.companyId == user.companyEnrolled ? 'secondary' : 'primary'}
+                        color={action.serviceId == user.serviceEnrolled ? 'secondary' : 'primary'}
                         onClick={() => {
-                            if (action.companyId == user.companyEnrolled) {
+                            if (action.serviceId == user.serviceEnrolled) {
                                 console.log('already logged');
                             } else {
-                                setUserEnrolledToCompany({ companyId: action.companyId, companyName: action.companyName, user: getUser });
+                                setUserEnrolledToService({ serviceId: action.serviceId, serviceName: action.serviceName, user: getUser });
                             }
                         }}
                     >
-                        {action.companyId == user.companyEnrolled ? 'Enrolled' : 'Enroll'}
+                        {action.serviceId == user.serviceEnrolled ? 'Enrolled' : 'Enroll'}
                     </Button>
                 </AnimateButton>
             </Box>
@@ -49,7 +49,7 @@ const CompanyView = () => {
     };
 
     useEffect(() => {
-        //setCompanies()
+        //setServices()
         console.log();
     }, []);
     return (
@@ -58,21 +58,21 @@ const CompanyView = () => {
                 <Grid item xs={12} container alignItems="center" justifyContent="center"></Grid>
             </Grid>
 
-            <MainCard title="Companies">
+            <MainCard title="Services">
                 <Grid container rowSpacing={gridSpacing} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     <Grid item xs={12} sm={6} lg={4}>
-                        {companies &&
-                            companies.map((companies) => {
+                        {services &&
+                            services.map((services) => {
                                 return (
                                     <SubCard
-                                        key={companies.id}
-                                        title={companies.name}
-                                        secondary={renderEnrollButton({ companyId: companies.id, companyName: companies.name })}
+                                        key={services.id}
+                                        title={services.name}
+                                        secondary={renderEnrollButton({ serviceId: services.id, serviceName: services.name })}
                                     >
                                         <Grid container direction="column" spacing={1}>
                                             <Grid item>
                                                 <MuiTypography variant="subtitle2" gutterBottom>
-                                                    {companies.role}
+                                                    {services.role}
                                                 </MuiTypography>
                                             </Grid>
                                         </Grid>
@@ -86,4 +86,4 @@ const CompanyView = () => {
     );
 };
 
-export default CompanyView;
+export default ServiceView;

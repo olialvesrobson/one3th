@@ -35,16 +35,16 @@ const Register = () => {
                                                 gutterBottom
                                                 variant={matchDownSM ? 'h3' : 'h2'}
                                             >
-                                                Edit Company
+                                                Edit Service
                                             </Typography>
                                         </Stack>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <FormEdit 
-                                            companyEmail={props.companyEmail}
+                                            serviceEmail={props.serviceEmail}
                                             numberOfEmployees={props.numberOfEmployees}
-                                            companyName={props.companyName}
-                                            companyABN={props.companyABN}
+                                            serviceName={props.serviceName}
+                                            serviceABN={props.serviceABN}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>

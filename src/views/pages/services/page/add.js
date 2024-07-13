@@ -31,7 +31,7 @@ const Register = () => {
                                                 gutterBottom
                                                 variant={matchDownSM ? 'h3' : 'h2'}
                                             >
-                                                Create Company
+                                                Create Service
                                             </Typography>
                                         </Stack>
                                     </Grid>

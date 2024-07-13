@@ -1,7 +1,7 @@
 import { doc, getDoc, getDocs, setDoc, collection, query, where, documentId } from 'firebase/firestore';
 import { firestore } from '../../../resources/config/firestore/store';
 import { serverTimestamp } from '@firebase/firestore';
-import { setCompanyToUser } from '../users/actions';
+import { setServiceToUser } from '../users/actions';
 import { makeUuid } from 'resources/components/utils/usefulFunctions';
 
 export const add = async (props) => {
@@ -30,27 +30,27 @@ export const add = async (props) => {
         createdAt: serverTimestamp()
     };
 
-    const result = await setDoc(doc(collection(firestore, 'companies'), uuid), docFields)
+    const result = await setDoc(doc(collection(firestore, 'services'), uuid), docFields)
         .then(function () {
-            console.log('addCompany: successful.');
+            console.log('addService: successful.');
 
-            setUserToCompany({
-                companyId: uuid,
+            setUserToService({
+                serviceId: uuid,
                 userId: owner,
                 userName: userName,
                 role: 'owner'
             });
 
-            setCompanyToUser({
-                companyId: uuid,
+            setServiceToUser({
+                serviceId: uuid,
                 user: owner,
-                companyName: name,
+                serviceName: name,
                 role: 'owner'
             });
-            return { status: true, message: 'Company created.', companyId: uuid };
+            return { status: true, message: 'Service created.', serviceId: uuid };
         })
         .catch((error) => {
-            console.log('addCompany error: ', error);
+            console.log('addService error: ', error);
             return { status: false, message: ('Error: ', error) };
         });
     return result;
@@ -58,7 +58,7 @@ export const add = async (props) => {
 
 export const edit = async (props) => {
     const { id, name, email, abn, numberOfEmployees, owner } = props;
-    const result = await setDoc(doc(collection(firestore, 'companies', id)), {
+    const result = await setDoc(doc(collection(firestore, 'services', id)), {
         name: name,
         email: email,
         abn: abn,
@@ -68,99 +68,99 @@ export const edit = async (props) => {
     })
         .then(() => {
             // dispatch({ type: 'ADD_USER_SUCCESS' });
-            console.log('editCompany: successful.');
-            return { status: true, message: 'Company created.' };
+            console.log('editService: successful.');
+            return { status: true, message: 'Service created.' };
         })
         .catch((error) => {
             // dispatch({ type: 'ADD_USER_ERROR' }, error);
-            console.log('editCompany error: ', error);
+            console.log('editService error: ', error);
             return { status: false, message: ('Error: ', error) };
         });
     return result;
 };
 
-export const fetchCompaniesByOwner = (props) => {
+export const fetchServicesByOwner = (props) => {
     return async (dispatch) => {
         const { owner } = props;
-        // const companies = query(collection(firestore, 'companies'), where('owner', '==', owner));
+        // const services = query(collection(firestore, 'services'), where('owner', '==', owner));
 
-        const docRef = doc(firestore, 'companies', owner);
+        const docRef = doc(firestore, 'services', owner);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            const company = docSnap.data();
-            dispatch({ type: 'FETCH_COMPANY', company });
+            const service = docSnap.data();
+            dispatch({ type: 'FETCH_SERVICE', service });
         }
     };
 };
 
-export const fetchCompaniesById = (props) => {
+export const fetchServicesById = (props) => {
     return async (dispatch) => {
-        const { companyId } = props;
-        // const companies = query(collection(firestore, 'companies'), where('owner', '==', owner));
+        const { serviceId } = props;
+        // const services = query(collection(firestore, 'services'), where('owner', '==', owner));
 
-        const docRef = doc(firestore, 'companies', companyId);
+        const docRef = doc(firestore, 'services', serviceId);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            const company = docSnap.data();
-            dispatch({ type: 'FETCH_COMPANY', company });
+            const service = docSnap.data();
+            dispatch({ type: 'FETCH_SERVICE', service });
         }
     };
 };
 
-export const fetchCompanies = () => {
+export const fetchServices = () => {
     return async (dispatch) => {
-        // const companies = query(collection(firestore, 'companies'), where('owner', '==', owner));
+        // const services = query(collection(firestore, 'services'), where('owner', '==', owner));
 
-        await getDocs(collection(firestore, 'companies'))
+        await getDocs(collection(firestore, 'services'))
             .then((docs) => {
-                const companies = docs.docs.map((doc) => {
+                const services = docs.docs.map((doc) => {
                     return {
                         id: doc.id,
                         ...doc.data()
                     };
                 });
-                dispatch({ type: 'FETCH_COMPANIES', companies });
+                dispatch({ type: 'FETCH_SERVICES', services });
             })
             .catch((error) => {
-                console.log('FETCH_COMPANIES_ERROR: ', error);
+                console.log('FETCH_SERVICES_ERROR: ', error);
             });
     };
 };
 
-export const fetchCompaniesByInvite = (props) => {
+export const fetchServicesByInvite = (props) => {
     const { invitedIds } = props;
     return async (dispatch) => {
-        // const companies = query(collection(firestore, 'companies'), where('owner', '==', owner));
-        const docRef = collection(firestore, 'companies');
+        // const services = query(collection(firestore, 'services'), where('owner', '==', owner));
+        const docRef = collection(firestore, 'services');
         const docWhere = where(documentId(), 'in', invitedIds);
         const queried = query(docRef, docWhere);
         await getDocs(queried)
             .then((docs) => {
-                const companiesInvited = docs.docs.map((doc) => {
+                const servicesInvited = docs.docs.map((doc) => {
                     return {
                         id: doc.id,
                         ...doc.data()
                     };
                 });
 
-                dispatch({ type: 'FETCH_COMPANIES_INVITED', companiesInvited });
+                dispatch({ type: 'FETCH_SERVICES_INVITED', servicesInvited });
             })
             .catch((error) => {
-                console.log('FETCH_COMPANIES_INVITED_ERROR: ', error);
+                console.log('FETCH_SERVICES_INVITED_ERROR: ', error);
             });
     };
 };
 
 export const inviteEmployee = async (props) => {
-    const { email, role, companyId, companyName } = props;
+    const { email, role, serviceId, serviceName } = props;
 
-    await setDoc(doc(collection(firestore, 'companyEmployeeInvites')), {
+    await setDoc(doc(collection(firestore, 'serviceEmployeeInvites')), {
         email: email,
         role: role,
-        companyId: companyId,
-        companyName: companyName,
+        serviceId: serviceId,
+        serviceName: serviceName,
         createdAt: serverTimestamp()
     })
         .then(() => {
@@ -178,14 +178,14 @@ export const inviteEmployee = async (props) => {
 export const removeInviteEmployee = (props) => {
     const { email } = props;
     return async () => {
-        // const companies = query(collection(firestore, 'companies'), where('owner', '==', owner));
-        const docRef = getDocs(collection(firestore, 'companyEmployeeInvites'));
+        // const services = query(collection(firestore, 'services'), where('owner', '==', owner));
+        const docRef = getDocs(collection(firestore, 'serviceEmployeeInvites'));
         const docWhere = where(docRef, 'email', '==', email);
         await query(docRef, docWhere)
             .then((docs) => {
                 console.log(docs);
                 docs.docs.map((doc) => {
-                    deleteDoc(firestore, 'companyEmployeeInvites', doc.id);
+                    deleteDoc(firestore, 'serviceEmployeeInvites', doc.id);
                     console.log('removeInviteEmployee: successful.', doc.id);
                 });
             })
@@ -195,24 +195,24 @@ export const removeInviteEmployee = (props) => {
     };
 };
 
-export const fetchCompanyInvites = (props) => {
-    const { companyId } = props;
+export const fetchServiceInvites = (props) => {
+    const { serviceId } = props;
     return async (dispatch) => {
-        // const companies = query(collection(firestore, 'companies'), where('owner', '==', owner));
-        const docRef = getDocs(collection(firestore, 'companyEmployeeInvites'));
-        const docWhere = where(docRef, 'companyId', '==', companyId);
+        // const services = query(collection(firestore, 'services'), where('owner', '==', owner));
+        const docRef = getDocs(collection(firestore, 'serviceEmployeeInvites'));
+        const docWhere = where(docRef, 'serviceId', '==', serviceId);
         await query(docRef, docWhere)
             .then((docs) => {
-                const companyInvites = docs.docs.map((doc) => {
+                const serviceInvites = docs.docs.map((doc) => {
                     return {
                         id: doc.id,
                         ...doc.data()
                     };
                 });
-                dispatch({ type: 'FETCH_COMPPANY_INVITES', companyInvites });
+                dispatch({ type: 'FETCH_COMPPANY_INVITES', serviceInvites });
             })
             .catch((error) => {
-                console.log('FETCH_COMPPANY_INVITES_ERROR: [fetchCompanyInvites]', error);
+                console.log('FETCH_COMPPANY_INVITES_ERROR: [fetchServiceInvites]', error);
             });
     };
 };
@@ -221,8 +221,8 @@ export const fetchEmployeeInvites = (props) => {
     const { email } = props;
 
     return async (dispatch) => {
-        // const companies = query(collection(firestore, 'companies'), where('owner', '==', owner));
-        const docRef = collection(firestore, 'companyEmployeeInvites');
+        // const services = query(collection(firestore, 'services'), where('owner', '==', owner));
+        const docRef = collection(firestore, 'serviceEmployeeInvites');
         const docWhere = where('email', '==', email);
         const queried = query(docRef, docWhere);
         await getDocs(queried)
@@ -241,9 +241,9 @@ export const fetchEmployeeInvites = (props) => {
     };
 };
 
-export const setUserToCompany = async (props) => {
-    const { companyId, userId, userName, role } = props;
-    const result = await setDoc(doc(firestore, 'companies', companyId, 'employees', userId), {
+export const setUserToService = async (props) => {
+    const { serviceId, userId, userName, role } = props;
+    const result = await setDoc(doc(firestore, 'services', serviceId, 'employees', userId), {
         id: userId,
         name: userName,
         role: role,
@@ -251,12 +251,12 @@ export const setUserToCompany = async (props) => {
     })
         .then(() => {
             // dispatch({ type: 'ADD_USER_SUCCESS' });
-            console.log('setCompanyToUser: successful.');
-            return { status: true, message: 'Company added to user.' };
+            console.log('setServiceToUser: successful.');
+            return { status: true, message: 'Service added to user.' };
         })
         .catch((error) => {
             // dispatch({ type: 'ADD_USER_ERROR' }, error);
-            console.log('setCompanyToUser error: ', error);
+            console.log('setServiceToUser error: ', error);
             return { status: false, message: ('Error: ', error) };
         });
     return result;

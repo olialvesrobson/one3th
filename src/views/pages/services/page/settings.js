@@ -6,7 +6,7 @@ import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import FormWrapper1 from '../../FormWrapper1';
 import FormCardWrapper from '../../FormCardWrapper';
 import AuthFooter from '../../../../ui-component/cards/AuthFooter';
-import InviteEmployeeToCompany from '../forms/inviteEmployee';
+import InviteEmployeeToService from '../forms/inviteEmployee';
 import ViewInviteEmployee from '../forms/viewInviteEmployee';
 
 // assets
@@ -22,7 +22,7 @@ const Settings = () => {
             <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
                 <Grid item xs={12}>
                     <Typography color={theme.palette.secondary.main} gutterBottom variant={matchDownSM ? 'h3' : 'h2'}>
-                        Company settings
+                        Service settings
                     </Typography>
                     <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: 'calc(100vh - 68px)' }}>
                         <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
@@ -40,7 +40,7 @@ const Settings = () => {
                                         </Stack>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <InviteEmployeeToCompany />
+                                        <InviteEmployeeToService />
                                     </Grid>
                                 </Grid>
                             </FormCardWrapper>

@@ -6,7 +6,7 @@ import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import FormWrapper1 from '../../FormWrapper1';
 import FormCardWrapper from '../../FormCardWrapper';
 import AuthFooter from '../../../../ui-component/cards/AuthFooter';
-import CompanyView from '../forms/view';
+import ServiceView from '../forms/view';
 
 // assets
 
@@ -31,12 +31,12 @@ const View = () => {
                                                 gutterBottom
                                                 variant={matchDownSM ? 'h3' : 'h2'}
                                             >
-                                                Companies
+                                                Services
                                             </Typography>
                                         </Stack>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <CompanyView />
+                                        <ServiceView />
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Divider />

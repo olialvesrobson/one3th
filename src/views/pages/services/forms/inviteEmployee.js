@@ -12,26 +12,26 @@ import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import OneOutlinedTextInput from 'utils/OneOutlinedTextInput';
 import OneSelect from 'utils/OneSelect';
-import { fetchCompaniesById, inviteEmployee } from '../actions';
+import { fetchServicesById, inviteEmployee } from '../actions';
 import { UserState } from 'views/pages/authentication/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
-const InviteEmployeeToCompany = ({ ...others }) => {
+const InviteEmployeeToService = ({ ...others }) => {
     const scriptedRef = useScriptRef();
     //const customization = useSelector((state) => state.customization);
     const getUser = UserState();
-    const companyId = useSelector((state) => state.users.user.companyEnrolled);
+    const serviceId = useSelector((state) => state.users.user.serviceEnrolled);
     const dispatch = useDispatch();
     const [saved, setSaved] = useState(false);
-    const getCompany = useSelector((state) => state.companies.company);
+    const getService = useSelector((state) => state.services.service);
     // const ausAbr = require('aus-abr');
 
     useEffect(() => {
         setSaved(false);
-        dispatch(fetchCompaniesById({ companyId: companyId }));
-    }, [dispatch, getCompany, getUser, companyId]);
+        dispatch(fetchServicesById({ serviceId: serviceId }));
+    }, [dispatch, getService, getUser, serviceId]);
 
     const roles = [
         { key: 'Admin', value: 'admin' },
@@ -44,8 +44,8 @@ const InviteEmployeeToCompany = ({ ...others }) => {
         inviteEmployee({
             email: values.employeeEmail,
             role: values.employeeRole,
-            companyId: companyId,
-            companyName: getCompany.name
+            serviceId: serviceId,
+            serviceName: getService.name
         });
     }
 
@@ -63,7 +63,7 @@ const InviteEmployeeToCompany = ({ ...others }) => {
                 <Grid item xs={12} container alignItems="center" justifyContent="center">
                     <Box sx={{ mb: 2 }}>
                         <Typography variant="subtitle1">
-                            Please provide the email address of the person you would like to add to this company.
+                            Please provide the email address of the person you would like to add to this service.
                         </Typography>
                     </Box>
                 </Grid>
@@ -160,4 +160,4 @@ const InviteEmployeeToCompany = ({ ...others }) => {
     );
 };
 
-export default InviteEmployeeToCompany;
+export default InviteEmployeeToService;
